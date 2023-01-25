@@ -31,3 +31,9 @@ menu.addEventListener("click", function (event) {
   event.stopPropagation();
   drawer.classList.toggle("open-menu-item");
 });
+
+// update year
+const yearCopy = document.getElementById("yearCopy");
+if (yearCopy) {
+  yearCopy.textContent = new Date().getFullYear();
+}

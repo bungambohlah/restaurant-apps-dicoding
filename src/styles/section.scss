@@ -2,3 +2,42 @@
   position: relative;
   z-index: 10;
 }
+
+.footer {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  background-color: rgb(31 41 55 / 1);
+  border-color: rgb(55 65 81 / 1);
+  border-style: dotted;
+  border-top-width: 2px;
+
+  .footer-container {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 80rem;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+
+    .footer-flex {
+      display: flex;
+      flex-wrap: wrap;
+
+      .footer-item {
+        width: 100%;
+        text-align: center;
+
+        p {
+          color: white;
+        }
+
+        a {
+          color: white;
+          transition-duration: 0.3s;
+        }
+        a:hover {
+          color: rgb(37 99 235 / 1);
+        }
+      }
+    }
+  }
+}
