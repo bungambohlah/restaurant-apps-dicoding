@@ -38,8 +38,14 @@ module.exports = {
             loader: "css-loader",
           },
           {
+            loader: "resolve-url-loader",
+          },
+          {
             // Compiles Sass to CSS
             loader: "sass-loader",
+            options: {
+              sourceMap: true, // used to load files
+            },
           },
         ],
       },
