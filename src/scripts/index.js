@@ -7,6 +7,7 @@ import "../scripts/restaurant-card";
 import "../styles/main.scss";
 import "../styles/header.scss";
 import "../styles/section.scss";
+import "../styles/lineicons.scss";
 
 // import dummy data
 import DummyData from "../DATA.json";
