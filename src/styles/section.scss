@@ -77,8 +77,8 @@
         box-shadow: 0 0 #fff, rgba(59, 130, 246, 0.5) 0px 0px 0px 0px,
           rgba(0, 0, 0, 0.1) 0 10px 15px -3px,
           rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
-        outline: 2px solid transparent;
-        outline-offset: 2px;
+        // outline: 2px solid transparent;
+        // outline-offset: 2px;
         transition-property: background-color, border-color, color, fill, stroke,
           opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
         transition-property: background-color, border-color, color, fill, stroke,
@@ -176,6 +176,10 @@
       box-shadow: 0 0 #0000, 0 0 #0000, 0 10px 15px -3px rgb(14, 165, 233),
         0 4px 6px -2px rgb(14, 165, 233);
     }
+    .restaurants-card:focus {
+      box-shadow: 0 0 #0000, 0 0 #0000, 0 10px 15px -3px rgb(14, 165, 233),
+        0 4px 6px -2px rgb(14, 165, 233);
+    }
 
     .restaurant-card-body {
       padding: 1.25rem;
@@ -213,9 +217,9 @@
 
       p {
         color: rgb(55 65 81 / 1);
-        font-style: italic;
         font-size: 0.875rem;
         line-height: 1.25rem;
+        font-weight: 500;
         margin-bottom: 0.5rem;
         margin-right: 0.5rem;
       }

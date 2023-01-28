@@ -23,18 +23,18 @@ class RestaurantCard extends HTMLElement {
     if (!data) {
       this.innerHTML = ``;
     } else if (data) {
-      this.innerHTML = `<div class="restaurants-card">
+      this.innerHTML = `<div class="restaurants-card" tabindex="0">
               <a>
-                <img src="${data.pictureId}" alt="${data.name} picture" />
+                <img tabindex="0" src="${data.pictureId}" alt="${data.name} picture" />
               </a>
               <div class="restaurant-card-body">
                 <a>
-                  <h1>${data.name}</h1>
+                  <h1 tabindex="0">${data.name}</h1>
                 </a>
               </div>
               <div class="restaurant-card-footer">
-                <p>${data.city}</p>
-                <p><star-rating value="${data.rating}" class="container-small"></star-rating></p>
+                <p tabindex="0">${data.city}</p>
+                <p tabindex="0"><star-rating value="${data.rating}" class="container-small"></star-rating></p>
               </div>
             </div>`;
     }

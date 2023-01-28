@@ -70,8 +70,7 @@
     background-color: rgb(191 219 254 / 1);
   }
   .side-menu:focus {
-    outline: 2px solid transparent;
-    outline-offset: 2px;
+    background-color: rgb(191 219 254 / 1);
   }
 
   .menu-item {
@@ -118,8 +117,8 @@
     border-bottom-left-radius: unset;
   }
   .menu-item :where(li:not(.disabled)) > :where(*:not(ul)) {
-    outline: 2px solid transparent;
-    outline-offset: 2px;
+    // outline: 2px solid transparent;
+    // outline-offset: 2px;
     transition-property: color, background-color, border-color,
       text-decoration-color, fill, stroke, opacity, box-shadow, transform,
       filter, -webkit-backdrop-filter;
@@ -145,8 +144,8 @@
     -moz-user-select: none;
     user-select: none;
     align-items: center;
-    outline: 2px solid transparent;
-    outline-offset: 2px;
+    // outline: 2px solid transparent;
+    // outline-offset: 2px;
   }
   .menu-item :where(li:not(.menu-item-title)) > :where(*:not(ul)) {
     display: flex;
