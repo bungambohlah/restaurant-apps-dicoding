@@ -39,6 +39,7 @@
     "workbox-webpack-plugin": "^6.5.4"
   },
   "dependencies": {
+    "@jchristou/star-rating-web-component": "^0.0.7",
     "regenerator-runtime": "^0.13.11"
   }
 }
