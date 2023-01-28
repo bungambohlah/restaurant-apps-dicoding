@@ -1,9 +1,15 @@
 import "regenerator-runtime"; /* for async await transpile */
+
+// import web components
+import "../scripts/restaurant-card";
+
+// import css / scss
 import "../styles/main.scss";
 import "../styles/header.scss";
 import "../styles/section.scss";
 
-console.log("Hello Coders! :)");
+// import dummy data
+import DummyData from "../DATA.json";
 
 // add classname when on scroll
 window.onscroll = function () {
@@ -36,4 +42,27 @@ menu.addEventListener("click", function (event) {
 const yearCopy = document.getElementById("yearCopy");
 if (yearCopy) {
   yearCopy.textContent = new Date().getFullYear();
+}
+
+// create restaurantcard webcomponent by dummy data
+const restaurantsContainer = document.querySelector(".restaurants-container");
+console.log("restaurantsContainer", restaurantsContainer);
+console.log("DummyData", DummyData);
+if (
+  restaurantsContainer &&
+  DummyData.restaurants &&
+  DummyData.restaurants.length
+) {
+  for (let idx = 0; idx < DummyData.restaurants.length; idx++) {
+    const restaurant = DummyData.restaurants[idx];
+
+    if (restaurant) {
+      const data = JSON.stringify(restaurant);
+
+      // append child to the restaurantContainer element
+      const restaurantCard = document.createElement("restaurant-card");
+      restaurantCard.setAttribute("restaurant", data);
+      restaurantsContainer.appendChild(restaurantCard);
+    }
+  }
 }
