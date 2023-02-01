@@ -47,8 +47,6 @@ if (yearCopy) {
 
 // create restaurantcard webcomponent by dummy data
 const restaurantsContainer = document.querySelector(".restaurants-container");
-console.log("restaurantsContainer", restaurantsContainer);
-console.log("DummyData", DummyData);
 if (
   restaurantsContainer &&
   DummyData.restaurants &&
