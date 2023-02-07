@@ -1,13 +1,14 @@
+/* eslint-disable no-useless-constructor */
 // import star rating
-import "@jchristou/star-rating-web-component";
+import '@jchristou/star-rating-web-component';
 
 // import star rating scss
-import "@jchristou/star-rating-web-component/dist/StarRating.scss";
+import '@jchristou/star-rating-web-component/dist/StarRating.scss';
 
 class RestaurantCard extends HTMLElement {
   // first, observe the attributes
   static get observedAttributes() {
-    return ["restaurant"];
+    return ['restaurant'];
   }
 
   constructor() {
@@ -18,7 +19,7 @@ class RestaurantCard extends HTMLElement {
   // lifecycle web components
   connectedCallback() {
     let data = null;
-    if (this.hasAttribute("restaurant")) data = JSON.parse(this.restaurant);
+    if (this.hasAttribute('restaurant')) data = JSON.parse(this.restaurant);
 
     if (!data) {
       this.innerHTML = ``;
@@ -34,20 +35,16 @@ class RestaurantCard extends HTMLElement {
     }
   }
 
-  disconnectedCallback() {}
-
-  attributeChangedCallback() {}
-
   /**
    * @param {String} restaurant
    */
   set restaurant(restaurant) {
-    this.setAttribute("restaurant", restaurant);
+    this.setAttribute('restaurant', restaurant);
   }
 
   get restaurant() {
-    return this.getAttribute("restaurant");
+    return this.getAttribute('restaurant');
   }
 }
 
-window.customElements.define("restaurant-card", RestaurantCard);
+window.customElements.define('restaurant-card', RestaurantCard);
