@@ -12,6 +12,9 @@ import '../styles/lineicons.scss';
 // import dummy data
 import DummyData from '../DATA.json';
 
+// import to register service worker
+import swRegister from './utils/sw-register';
+
 // add classname when on scroll
 window.onscroll = function windowOnScroll() {
   const headerNavbar = document.querySelector('.navbar');
@@ -66,3 +69,7 @@ if (
     }
   }
 }
+
+window.addEventListener('load', () => {
+  swRegister();
+});

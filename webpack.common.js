@@ -1,15 +1,15 @@
-const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const CopyWebpackPlugin = require("copy-webpack-plugin");
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
 
 module.exports = {
   entry: {
-    app: path.resolve(__dirname, "src/scripts/index.js"),
-    sw: path.resolve(__dirname, "src/scripts/sw.js"),
+    app: path.resolve(__dirname, 'src/scripts/index.js'),
   },
   output: {
-    filename: "[name].bundle.js",
-    path: path.resolve(__dirname, "dist"),
+    filename: '[name].bundle.js',
+    path: path.resolve(__dirname, 'dist'),
     clean: true,
   },
   module: {
@@ -19,10 +19,10 @@ module.exports = {
         use: [
           {
             // Creates `style` nodes from JS strings
-            loader: "style-loader",
+            loader: 'style-loader',
           },
           {
-            loader: "css-loader",
+            loader: 'css-loader',
           },
         ],
       },
@@ -31,18 +31,18 @@ module.exports = {
         use: [
           {
             // Creates `style` nodes from JS strings
-            loader: "style-loader",
+            loader: 'style-loader',
           },
           {
             // Translates CSS into CommonJS
-            loader: "css-loader",
+            loader: 'css-loader',
           },
           {
-            loader: "resolve-url-loader",
+            loader: 'resolve-url-loader',
           },
           {
             // Compiles Sass to CSS
-            loader: "sass-loader",
+            loader: 'sass-loader',
             options: {
               sourceMap: true, // used to load files
             },
@@ -53,16 +53,17 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      filename: "index.html",
-      template: path.resolve(__dirname, "src/templates/index.html"),
+      filename: 'index.html',
+      template: path.resolve(__dirname, 'src/templates/index.html'),
     }),
     new CopyWebpackPlugin({
       patterns: [
         {
-          from: path.resolve(__dirname, "src/public/"),
-          to: path.resolve(__dirname, "dist/"),
+          from: path.resolve(__dirname, 'src/public/'),
+          to: path.resolve(__dirname, 'dist/'),
         },
       ],
     }),
+    new WorkboxWebpackPlugin.GenerateSW({}),
   ],
 };
