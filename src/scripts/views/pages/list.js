@@ -125,6 +125,11 @@ const NowPlaying = {
       const restaurantCard = document.createElement('restaurant-card');
       restaurantCard.setAttribute('restaurant', data);
       listContainer.appendChild(restaurantCard);
+
+      restaurantCard.addEventListener('click', (event) => {
+        event.preventDefault();
+        window.location.href = `/#/detail/${list.id}`;
+      });
     });
   },
 };
