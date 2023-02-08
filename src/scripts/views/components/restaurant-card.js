@@ -5,6 +5,9 @@ import '@jchristou/star-rating-web-component';
 // import star rating scss
 import '@jchristou/star-rating-web-component/dist/StarRating.scss';
 
+// import base image url
+import { BASE_IMAGE_URL } from '../../globals/config';
+
 class RestaurantCard extends HTMLElement {
   // first, observe the attributes
   static get observedAttributes() {
@@ -25,7 +28,7 @@ class RestaurantCard extends HTMLElement {
       this.innerHTML = ``;
     } else if (data) {
       this.innerHTML = `<div class="restaurants-card" tabindex="0">
-              <img tabindex="0" src="${data.pictureId}" alt="${data.name}" />
+              <img tabindex="0" src="${BASE_IMAGE_URL}/${data.pictureId}" alt="${data.name}" />
               <h1 tabindex="0" class="restaurant-card-body">${data.name}</h1>
               <div class="restaurant-card-footer">
                 <p tabindex="0">${data.city}</p>
