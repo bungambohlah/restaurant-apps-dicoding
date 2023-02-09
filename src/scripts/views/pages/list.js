@@ -130,6 +130,14 @@ const NowPlaying = {
         event.preventDefault();
         window.location.href = `/#/detail/${list.id}`;
       });
+
+      // for accessibility purpose
+      restaurantCard.addEventListener('keypress', (event) => {
+        if (event.key === 'Enter') {
+          event.preventDefault();
+          window.location.href = `/#/detail/${list.id}`;
+        }
+      });
     });
   },
 };

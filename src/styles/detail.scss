@@ -1,7 +1,6 @@
 #detail-restaurant {
   position: relative;
   width: 100%;
-  height: 100vh;
   z-index: 10;
 }
 
@@ -11,7 +10,7 @@
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  height: 100%;
+  height: 100vh;
   background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
     url(https://images.pexels.com/photos/684965/pexels-photo-684965.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260);
 
@@ -23,6 +22,199 @@
     transform: translate(-50%, -50%);
     color: white;
     font-size: 3.75rem;
+  }
+}
+
+.detail-restaurant-description {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+
+  .restaurant-desc-section {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 80rem;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+
+    h2 {
+      text-align: center;
+      margin-bottom: 3rem;
+      font-size: 2.25rem;
+      line-height: 2.5rem;
+      font-weight: 700;
+      letter-spacing: 0.025rem;
+      color: rgb(55 65 81 / 1);
+    }
+
+    .restaurant-desc-section-info {
+      display: flex;
+      flex-wrap: wrap;
+
+      .restaurant-desc-section-item {
+        width: 100%;
+
+        .restaurant-desc-section-info-container {
+          margin-left: 0.75rem;
+
+          h3 {
+            margin-top: 1.25rem;
+            margin-bottom: 1.25rem;
+            font-size: 1.25rem;
+            line-height: 1.75rem;
+            font-weight: 700;
+            color: rgb(55 65 81 / 1);
+            text-transform: uppercase;
+          }
+
+          .restaurant-desc-section-info-item {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            margin-bottom: 1.5rem;
+
+            .restaurant-desc-section-info-item-icon {
+              display: flex;
+              height: 2.5rem;
+              width: 2.5rem;
+              align-items: center;
+              justify-content: center;
+              border-radius: 9999px;
+              background-color: rgb(37 99 235 / 1);
+              font-size: 1.25rem;
+              line-height: 1.75rem;
+              color: rgb(255 255 255 / 1);
+            }
+
+            p {
+              padding-left: 0.75rem;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.detail-restaurant-menu {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+  background-color: rgb(219 234 254 / 1);
+
+  .detail-restaurant-menu-container {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 80rem;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+
+    h2 {
+      text-align: center;
+      margin-bottom: 2rem;
+      font-size: 2.25rem;
+      line-height: 2.5rem;
+      font-weight: 700;
+      letter-spacing: 0.025em;
+      color: rgb(55 65 81 / 1);
+    }
+
+    h3 {
+      text-align: left;
+      margin-top: 2rem;
+      margin-bottom: 2rem;
+      font-size: 1.875rem;
+      line-height: 2.25rem;
+      font-weight: 600;
+      letter-spacing: 0.025em;
+      color: rgb(55 65 81 / 1);
+    }
+
+    .detail-restaurant-menu-content {
+      display: flex;
+      flex-wrap: wrap;
+
+      .detail-restaurant-menu-content-container {
+        width: 50%;
+
+        .detail-restaurant-menu-content-container-root {
+          margin: 1rem;
+
+          .detail-restaurant-menu-content-icon {
+            font-size: 3rem;
+            line-height: 1;
+            margin-bottom: 1rem;
+            color: rgb(37 99 235 / 1);
+          }
+
+          .menu-title {
+            margin-bottom: 0.75rem;
+            display: block;
+            font-size: 1.125rem;
+            line-height: 1.75rem;
+            font-weight: 500;
+            color: rgb(31 41 55 / 1);
+          }
+        }
+      }
+    }
+  }
+}
+
+.detail-reviews {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+  color: rgba(55, 65, 81, 1);
+  padding-left: 1rem;
+  padding-right: 1rem;
+
+  .detail-reviews-title-container {
+    text-align: center;
+    max-width: 48rem;
+    margin-left: auto;
+    margin-right: auto;
+
+    h2 {
+      font-size: 2.25rem;
+      line-height: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      color: rgba(31, 41, 55, 1);
+    }
+  }
+
+  .detail-reviews-container {
+    display: grid;
+    gap: 3rem;
+    text-align: center;
+
+    .detail-reviews-root {
+      margin-bottom: 1.5rem;
+
+      .detail-reviews-root-img {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-bottom: 1.5rem;
+
+        img {
+          width: 6rem;
+          border-radius: 9999px;
+          box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1),
+            0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+      }
+
+      .detail-reviews-root-content {
+        font-size: 1.25rem;
+        line-height: 1.75rem;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        color: rgba(107, 114, 128, 1);
+      }
+
+      .detail-reviews-root-name {
+        font-style: italic;
+      }
+    }
   }
 }
 
@@ -44,6 +236,16 @@
       }
     }
   }
+
+  .detail-restaurant-menu {
+    .detail-restaurant-menu-container {
+      .detail-restaurant-menu-content {
+        .detail-restaurant-menu-content-container {
+          width: 33.333333%;
+        }
+      }
+    }
+  }
 }
 
 @media (min-width: 768px) {
@@ -54,6 +256,44 @@
       }
     }
   }
+
+  .detail-restaurant-description {
+    .restaurant-desc-section {
+      .restaurant-desc-section-info {
+        .restaurant-desc-section-item {
+          width: 50%;
+
+          .restaurant-desc-section-info-container {
+            margin-left: 5rem;
+
+            h3 {
+              margin-top: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .detail-restaurant-menu {
+    .detail-restaurant-menu-container {
+      .detail-restaurant-menu-content {
+        .detail-restaurant-menu-content-container {
+          width: 33.333333%;
+        }
+      }
+    }
+  }
+
+  .detail-reviews {
+    .detail-reviews-container {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+
+      .detail-reviews-root {
+        margin-bottom: 0;
+      }
+    }
+  }
 }
 
 @media (min-width: 1024px) {
@@ -61,6 +301,16 @@
     .detail-restaurant-hero {
       h1 {
         font-size: 3.75rem;
+      }
+    }
+  }
+
+  .detail-restaurant-menu {
+    .detail-restaurant-menu-container {
+      .detail-restaurant-menu-content {
+        .detail-restaurant-menu-content-container {
+          width: 25%;
+        }
       }
     }
   }
