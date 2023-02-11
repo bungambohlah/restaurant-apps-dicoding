@@ -10,6 +10,10 @@ import '../components/restaurant-detail-information';
 import '../components/restaurant-detail-menu';
 import '../components/restaurant-detail-testimonial';
 
+// import templates
+import { createLikeButtonTemplate } from '../template/template-creator';
+import LikeButtonInitiator from '../../utils/like-button-initiator';
+
 const NowPlaying = {
   async render() {
     return `
@@ -31,11 +35,23 @@ const NowPlaying = {
       <div class="detail-restaurant-hero" style="background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
       url(${BASE_LARGE_IMAGE_URL}/${detail.pictureId});">
         <h1 tabindex="0">${detail.name}</h1>
+        <div id="likeButtonContainer"></div>
       </div>
       <div class="detail-restaurant-description"></div>
       <div class="detail-restaurant-menu"></div>
       <div class="detail-reviews"></div>
       `;
+
+      // add favorite button
+      LikeButtonInitiator.init({
+        likeButtonContainer: document.querySelector('#likeButtonContainer'),
+        restaurant: { id: detail.id, name: detail.name },
+      });
+
+      const likeButtonContainer = document.querySelector(
+        '#likeButtonContainer',
+      );
+      likeButtonContainer.innerHTML = createLikeButtonTemplate();
 
       // add detail information
       const detailRestaurantDesc = detailContainer.querySelector(
