@@ -3,7 +3,7 @@ import RestaurantSource from '../../data/restaurant-source';
 // import web components
 import '../components/restaurant-card';
 
-const NowPlaying = {
+const ListPage = {
   async render() {
     return `
     <section id="hero" class="hero">
@@ -147,4 +147,4 @@ const NowPlaying = {
   },
 };
 
-export default NowPlaying;
+export default ListPage;

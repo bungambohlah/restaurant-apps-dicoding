@@ -14,7 +14,7 @@ import '../components/restaurant-detail-testimonial';
 import { createLikeButtonTemplate } from '../template/template-creator';
 import LikeButtonInitiator from '../../utils/like-button-initiator';
 
-const NowPlaying = {
+const DetailPage = {
   async render() {
     return `
       <section id="detail-restaurant">
@@ -91,4 +91,4 @@ const NowPlaying = {
   },
 };
 
-export default NowPlaying;
+export default DetailPage;
