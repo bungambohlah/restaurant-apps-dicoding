@@ -144,6 +144,9 @@ const ListPage = {
         });
       });
     }
+
+    // scroll window to the top after render
+    window.scrollTo(0, 0);
   },
 };
 

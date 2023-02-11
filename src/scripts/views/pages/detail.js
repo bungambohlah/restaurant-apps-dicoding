@@ -88,6 +88,9 @@ const DetailPage = {
       restaurantDetailTesti.setAttribute('detail', detailString);
       detailRestaurantTesti.appendChild(restaurantDetailTesti);
     }
+
+    // scroll window to the top after render
+    window.scrollTo(0, 0);
   },
 };
 
