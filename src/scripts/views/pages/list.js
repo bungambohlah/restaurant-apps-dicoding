@@ -26,6 +26,7 @@ const NowPlaying = {
       </div>
     </section>
     <section id="restaurants">
+      <div class="loader-container"><span class="loader"></span></div>
       <div id="restaurants-container" class="restaurants-container"></div>
     </section>
     <section id="services">
@@ -118,27 +119,33 @@ const NowPlaying = {
   async afterRender() {
     const lists = await RestaurantSource.list();
     const listContainer = document.querySelector('#restaurants-container');
-    lists.forEach((list) => {
-      const data = JSON.stringify(list);
+    if (lists && lists.length) {
+      // if list existing then remove the loader element;
+      const loaderContainer = document.querySelector('.loader-container');
+      loaderContainer.remove();
 
-      // append child to the restaurantContainer element
-      const restaurantCard = document.createElement('restaurant-card');
-      restaurantCard.setAttribute('restaurant', data);
-      listContainer.appendChild(restaurantCard);
+      lists.forEach((list) => {
+        const data = JSON.stringify(list);
 
-      restaurantCard.addEventListener('click', (event) => {
-        event.preventDefault();
-        window.location.href = `/#/detail/${list.id}`;
-      });
+        // append child to the restaurantContainer element
+        const restaurantCard = document.createElement('restaurant-card');
+        restaurantCard.setAttribute('restaurant', data);
+        listContainer.appendChild(restaurantCard);
 
-      // for accessibility purpose
-      restaurantCard.addEventListener('keypress', (event) => {
-        if (event.key === 'Enter') {
+        restaurantCard.addEventListener('click', (event) => {
           event.preventDefault();
           window.location.href = `/#/detail/${list.id}`;
-        }
+        });
+
+        // for accessibility purpose
+        restaurantCard.addEventListener('keypress', (event) => {
+          if (event.key === 'Enter') {
+            event.preventDefault();
+            window.location.href = `/#/detail/${list.id}`;
+          }
+        });
       });
-    });
+    }
   },
 };
 

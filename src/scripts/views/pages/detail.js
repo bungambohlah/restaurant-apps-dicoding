@@ -14,10 +14,13 @@ import '@jchristou/star-rating-web-component/dist/StarRating.scss';
 const NowPlaying = {
   async render() {
     return `
-      <section id="detail-restaurant"></section>
+      <section id="detail-restaurant">
+        <div class="loader-container"><span class="loader"></span></div>
+      </section>
     `;
   },
 
+  // TODO: convert some section as web component
   async afterRender() {
     const url = UrlParser.parseActiveUrlWithoutCombiner();
     const detail = await RestaurantSource.detailRestaurant(url.id);
@@ -127,7 +130,6 @@ const NowPlaying = {
       </div>
     </div>
     `;
-    console.log('detail', detail);
   },
 };
 
