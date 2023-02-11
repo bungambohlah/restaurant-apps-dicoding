@@ -45,7 +45,13 @@ const NowPlaying = {
       // add favorite button
       LikeButtonInitiator.init({
         likeButtonContainer: document.querySelector('#likeButtonContainer'),
-        restaurant: { id: detail.id, name: detail.name },
+        restaurant: {
+          id: detail.id,
+          name: detail.name,
+          pictureId: detail.pictureId,
+          city: detail.city,
+          rating: detail.rating,
+        },
       });
 
       const likeButtonContainer = document.querySelector(
