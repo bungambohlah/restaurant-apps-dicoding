@@ -43,6 +43,7 @@
     "@jchristou/star-rating-web-component": "^0.0.7",
     "copy-webpack-plugin": "^11.0.0",
     "html-webpack-plugin": "^5.5.0",
+    "idb": "^7.1.1",
     "regenerator-runtime": "^0.13.11",
     "webpack-merge": "^5.8.0",
     "workbox-webpack-plugin": "^6.5.4",
