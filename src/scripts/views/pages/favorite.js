@@ -16,38 +16,54 @@ const FavoritePage = {
   },
 
   async afterRender() {
-    const favorites = await FavoriteRestaurantIdb.getAllRestaurants();
     const listContainer = document.querySelector('#restaurants-container');
-    if (favorites && favorites.length) {
+
+    try {
+      const favorites = await FavoriteRestaurantIdb.getAllRestaurants();
+
+      if (favorites && favorites.length) {
+        favorites.forEach((favorite) => {
+          const data = JSON.stringify(favorite);
+
+          // append child to the restaurantContainer element
+          const restaurantCard = document.createElement('restaurant-card');
+          restaurantCard.setAttribute('restaurant', data);
+          listContainer.appendChild(restaurantCard);
+
+          restaurantCard.addEventListener('click', (event) => {
+            event.preventDefault();
+            window.location.href = `/#/detail/${favorite.id}`;
+          });
+
+          // for accessibility purpose
+          restaurantCard.addEventListener('keypress', (event) => {
+            if (event.key === 'Enter') {
+              event.preventDefault();
+              window.location.href = `/#/detail/${favorite.id}`;
+            }
+          });
+        });
+      } else if (!favorites || (favorites && !favorites.length)) {
+        listContainer.setAttribute(
+          'style',
+          'grid-template-columns: repeat(1, minmax(0, 1fr)); margin-top: -3rem',
+        );
+        listContainer.innerHTML = '<error-card favoriteempty="true" />';
+      }
+    } catch (error) {
+      listContainer.setAttribute(
+        'style',
+        'grid-template-columns: repeat(1, minmax(0, 1fr)); margin-top: -3rem',
+      );
+      listContainer.innerHTML = '<error-card />';
+    } finally {
       // if list existing then remove the loader element;
       const loaderContainer = document.querySelector('.loader-container');
       loaderContainer.remove();
 
-      favorites.forEach((favorite) => {
-        const data = JSON.stringify(favorite);
-
-        // append child to the restaurantContainer element
-        const restaurantCard = document.createElement('restaurant-card');
-        restaurantCard.setAttribute('restaurant', data);
-        listContainer.appendChild(restaurantCard);
-
-        restaurantCard.addEventListener('click', (event) => {
-          event.preventDefault();
-          window.location.href = `/#/detail/${favorite.id}`;
-        });
-
-        // for accessibility purpose
-        restaurantCard.addEventListener('keypress', (event) => {
-          if (event.key === 'Enter') {
-            event.preventDefault();
-            window.location.href = `/#/detail/${favorite.id}`;
-          }
-        });
-      });
+      // scroll window to the top after render
+      window.scrollTo(0, 0);
     }
-
-    // scroll window to the top after render
-    window.scrollTo(0, 0);
   },
 };
 

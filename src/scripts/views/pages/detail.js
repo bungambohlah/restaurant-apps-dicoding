@@ -9,6 +9,7 @@ import { BASE_LARGE_IMAGE_URL } from '../../globals/config';
 import '../components/restaurant-detail-information';
 import '../components/restaurant-detail-menu';
 import '../components/restaurant-detail-testimonial';
+import '../components/error-card';
 
 // import templates
 import { createLikeButtonTemplate } from '../template/template-creator';
@@ -24,73 +25,80 @@ const DetailPage = {
   },
 
   async afterRender() {
-    const url = UrlParser.parseActiveUrlWithoutCombiner();
-    const detail = await RestaurantSource.detailRestaurant(url.id);
+    const detailContainer = document.querySelector('#detail-restaurant');
 
-    if (detail) {
-      const detailString = JSON.stringify(detail);
+    try {
+      const url = UrlParser.parseActiveUrlWithoutCombiner();
+      const detail = await RestaurantSource.detailRestaurant(url.id);
 
-      const detailContainer = document.querySelector('#detail-restaurant');
-      detailContainer.innerHTML = `
-      <div class="detail-restaurant-hero" style="background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-      url(${BASE_LARGE_IMAGE_URL}/${detail.pictureId});">
-        <h1 tabindex="0">${detail.name}</h1>
-        <div id="likeButtonContainer"></div>
-      </div>
-      <div class="detail-restaurant-description"></div>
-      <div class="detail-restaurant-menu"></div>
-      <div class="detail-reviews"></div>
-      `;
+      if (detail) {
+        const detailString = JSON.stringify(detail);
 
-      // add favorite button
-      LikeButtonInitiator.init({
-        likeButtonContainer: document.querySelector('#likeButtonContainer'),
-        restaurant: {
-          id: detail.id,
-          name: detail.name,
-          pictureId: detail.pictureId,
-          city: detail.city,
-          rating: detail.rating,
-        },
-      });
+        detailContainer.innerHTML = `
+        <div class="detail-restaurant-hero" style="background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+        url(${BASE_LARGE_IMAGE_URL}/${detail.pictureId});">
+          <h1 tabindex="0">${detail.name}</h1>
+          <div id="likeButtonContainer"></div>
+        </div>
+        <div class="detail-restaurant-description"></div>
+        <div class="detail-restaurant-menu"></div>
+        <div class="detail-reviews"></div>
+        `;
 
-      const likeButtonContainer = document.querySelector(
-        '#likeButtonContainer',
-      );
-      likeButtonContainer.innerHTML = createLikeButtonTemplate();
+        // add favorite button
+        LikeButtonInitiator.init({
+          likeButtonContainer: document.querySelector('#likeButtonContainer'),
+          restaurant: {
+            id: detail.id,
+            name: detail.name,
+            pictureId: detail.pictureId,
+            city: detail.city,
+            rating: detail.rating,
+          },
+        });
 
-      // add detail information
-      const detailRestaurantDesc = detailContainer.querySelector(
-        '.detail-restaurant-description',
-      );
-      const restaurantDetailInfo = document.createElement(
-        'restaurant-detail-information',
-      );
-      restaurantDetailInfo.setAttribute('detail', detailString);
-      detailRestaurantDesc.appendChild(restaurantDetailInfo);
+        const likeButtonContainer = document.querySelector(
+          '#likeButtonContainer',
+        );
+        likeButtonContainer.innerHTML = createLikeButtonTemplate();
 
-      // add detail menu
-      const detailRestaurantMenu = detailContainer.querySelector(
-        '.detail-restaurant-menu',
-      );
-      const restaurantDetailMenu = document.createElement(
-        'restaurant-detail-menu',
-      );
-      restaurantDetailMenu.setAttribute('detail', detailString);
-      detailRestaurantMenu.appendChild(restaurantDetailMenu);
+        // add detail information
+        const detailRestaurantDesc = detailContainer.querySelector(
+          '.detail-restaurant-description',
+        );
+        const restaurantDetailInfo = document.createElement(
+          'restaurant-detail-information',
+        );
+        restaurantDetailInfo.setAttribute('detail', detailString);
+        detailRestaurantDesc.appendChild(restaurantDetailInfo);
 
-      // add detail testimonial
-      const detailRestaurantTesti =
-        detailContainer.querySelector('.detail-reviews');
-      const restaurantDetailTesti = document.createElement(
-        'restaurant-detail-testimonial',
-      );
-      restaurantDetailTesti.setAttribute('detail', detailString);
-      detailRestaurantTesti.appendChild(restaurantDetailTesti);
+        // add detail menu
+        const detailRestaurantMenu = detailContainer.querySelector(
+          '.detail-restaurant-menu',
+        );
+        const restaurantDetailMenu = document.createElement(
+          'restaurant-detail-menu',
+        );
+        restaurantDetailMenu.setAttribute('detail', detailString);
+        detailRestaurantMenu.appendChild(restaurantDetailMenu);
+
+        // add detail testimonial
+        const detailRestaurantTesti =
+          detailContainer.querySelector('.detail-reviews');
+        const restaurantDetailTesti = document.createElement(
+          'restaurant-detail-testimonial',
+        );
+        restaurantDetailTesti.setAttribute('detail', detailString);
+        detailRestaurantTesti.appendChild(restaurantDetailTesti);
+      } else if (!detail) {
+        detailContainer.innerHTML = '<error-card />';
+      }
+    } catch (error) {
+      detailContainer.innerHTML = '<error-card />';
+    } finally {
+      // scroll window to the top after render
+      window.scrollTo(0, 0);
     }
-
-    // scroll window to the top after render
-    window.scrollTo(0, 0);
   },
 };
 

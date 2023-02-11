@@ -2,6 +2,7 @@ import RestaurantSource from '../../data/restaurant-source';
 
 // import web components
 import '../components/restaurant-card';
+import '../components/error-card';
 
 const ListPage = {
   async render() {
@@ -115,38 +116,54 @@ const ListPage = {
   },
 
   async afterRender() {
-    const lists = await RestaurantSource.list();
     const listContainer = document.querySelector('#restaurants-container');
-    if (lists && lists.length) {
+
+    try {
+      const lists = await RestaurantSource.list();
+
+      if (lists && lists.length) {
+        lists.forEach((list) => {
+          const data = JSON.stringify(list);
+
+          // append child to the restaurantContainer element
+          const restaurantCard = document.createElement('restaurant-card');
+          restaurantCard.setAttribute('restaurant', data);
+          listContainer.appendChild(restaurantCard);
+
+          restaurantCard.addEventListener('click', (event) => {
+            event.preventDefault();
+            window.location.href = `/#/detail/${list.id}`;
+          });
+
+          // for accessibility purpose
+          restaurantCard.addEventListener('keypress', (event) => {
+            if (event.key === 'Enter') {
+              event.preventDefault();
+              window.location.href = `/#/detail/${list.id}`;
+            }
+          });
+        });
+      } else if (!lists || (lists && !lists.length)) {
+        listContainer.setAttribute(
+          'style',
+          'grid-template-columns: repeat(1, minmax(0, 1fr))',
+        );
+        listContainer.innerHTML = '<error-card />';
+      }
+    } catch (error) {
+      listContainer.setAttribute(
+        'style',
+        'grid-template-columns: repeat(1, minmax(0, 1fr))',
+      );
+      listContainer.innerHTML = '<error-card />';
+    } finally {
       // if list existing then remove the loader element;
       const loaderContainer = document.querySelector('.loader-container');
       loaderContainer.remove();
 
-      lists.forEach((list) => {
-        const data = JSON.stringify(list);
-
-        // append child to the restaurantContainer element
-        const restaurantCard = document.createElement('restaurant-card');
-        restaurantCard.setAttribute('restaurant', data);
-        listContainer.appendChild(restaurantCard);
-
-        restaurantCard.addEventListener('click', (event) => {
-          event.preventDefault();
-          window.location.href = `/#/detail/${list.id}`;
-        });
-
-        // for accessibility purpose
-        restaurantCard.addEventListener('keypress', (event) => {
-          if (event.key === 'Enter') {
-            event.preventDefault();
-            window.location.href = `/#/detail/${list.id}`;
-          }
-        });
-      });
+      // scroll window to the top after render
+      window.scrollTo(0, 0);
     }
-
-    // scroll window to the top after render
-    window.scrollTo(0, 0);
   },
 };
 
