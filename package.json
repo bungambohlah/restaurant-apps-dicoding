@@ -45,8 +45,12 @@
     "copy-webpack-plugin": "^11.0.0",
     "html-webpack-plugin": "^5.5.0",
     "idb": "^7.1.1",
+    "node-snackbar": "^0.1.16",
     "regenerator-runtime": "^0.13.11",
     "webpack-merge": "^5.8.0",
+    "workbox-precaching": "^6.5.4",
+    "workbox-routing": "^6.5.4",
+    "workbox-strategies": "^6.5.4",
     "workbox-webpack-plugin": "^6.5.4",
     "workbox-window": "^6.5.4"
   }
