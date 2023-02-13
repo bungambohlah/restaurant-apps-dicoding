@@ -1,4 +1,10 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable no-useless-constructor */
+import Snackbar from 'node-snackbar/dist/snackbar.min';
+// import snackbar
+import 'node-snackbar/dist/snackbar.min.css';
+
+import { BASE_URL } from '../../globals/config';
 
 class RestaurantDetailTesti extends HTMLElement {
   // first, observe the attributes
@@ -20,9 +26,9 @@ class RestaurantDetailTesti extends HTMLElement {
       this.innerHTML = ``;
     } else if (detail) {
       this.innerHTML = `<div class="detail-reviews-title-container">
-          <h2 tabindex="0">Our Testimonials</h3>
+          <h2 tabindex="0">Our Testimonials</h2>
         </div>
-  
+
         <div class="detail-reviews-container">
           ${detail.customerReviews
             .map(
@@ -37,7 +43,78 @@ class RestaurantDetailTesti extends HTMLElement {
           </div>`,
             )
             .join('')}
-        </div>`;
+        </div>
+
+        <div class="detail-reviews-title-container review-form">
+          <h3 tabindex="0">Add your Review</h3>
+          <form method="POST" action="${BASE_URL}/review" id="form-review">
+            <input type="hidden" name="id" value="${detail.id}" />
+            <div class="review-form-full">
+              <input type="text" placeholder="Name" id="name" name="name" class="form-input" 
+              required data-error="Please enter your name">
+            </div>
+            <div class="review-form-full">
+              <textarea class="form-input" id="review" name="review" placeholder="Enter your review" rows="5" data-error="Write your review" required></textarea>
+            </div>
+            <div class="review-form-full">
+              <input type="submit" role="button" value="Submit" class="review-form-submit" />
+            </div>
+          </form>
+        </div>
+        `;
+
+      const formReview = this.querySelector('#form-review');
+      formReview.addEventListener(
+        'submit',
+        (e) => {
+          e.preventDefault();
+          const form = e.target;
+          const formData = new FormData(form);
+          const formDataObj = Object.fromEntries(formData);
+
+          if (formDataObj && formDataObj.id) {
+            const body = new URLSearchParams(formData);
+
+            fetch(form.getAttribute('action'), {
+              method: 'post',
+              body,
+            })
+              .then((response) => {
+                Snackbar.show({
+                  pos: 'bottom-right',
+                  text: 'Already submit your review.',
+                  actionText: 'Thanks',
+                  actionTextColor: '#0081b4',
+                });
+                return response.json();
+              })
+              .then((data) => {
+                const customerReviews = data.customerReviews || null;
+                if (customerReviews) {
+                  this.setAttribute(
+                    'detail',
+                    JSON.stringify({ ...detail, customerReviews }),
+                  );
+                  this.connectedCallback();
+                }
+              })
+              .catch(() => {
+                Snackbar.show({
+                  pos: 'bottom-right',
+                  text: 'Something went wrong, please try again.',
+                  actionText: 'Dismiss',
+                });
+              });
+          } else {
+            Snackbar.show({
+              pos: 'bottom-right',
+              text: 'Something went wrong, please try again.',
+              actionText: 'Dismiss',
+            });
+          }
+        },
+        true,
+      );
     }
   }
 
