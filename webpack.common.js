@@ -2,6 +2,10 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
   entry: {
@@ -12,15 +16,37 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     clean: true,
   },
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+      minSize: 20000,
+      maxSize: 70000,
+      minChunks: 1,
+      maxAsyncRequests: 30,
+      maxInitialRequests: 30,
+      automaticNameDelimiter: '~',
+      enforceSizeThreshold: 50000,
+      cacheGroups: {
+        defaultVendors: {
+          test: /[\\/]node_modules[\\/]/,
+          priority: -10,
+        },
+        default: {
+          minChunks: 2,
+          priority: -20,
+          reuseExistingChunk: true,
+        },
+      },
+    },
+    minimize: true,
+    minimizer: [new TerserPlugin(), new CssMinimizerPlugin()],
+  },
   module: {
     rules: [
       {
         test: /\.css$/,
         use: [
-          {
-            // Creates `style` nodes from JS strings
-            loader: 'style-loader',
-          },
+          { loader: MiniCssExtractPlugin.loader },
           {
             loader: 'css-loader',
           },
@@ -29,10 +55,7 @@ module.exports = {
       {
         test: /\.s[ac]ss$/i,
         use: [
-          {
-            // Creates `style` nodes from JS strings
-            loader: 'style-loader',
-          },
+          { loader: MiniCssExtractPlugin.loader },
           {
             // Translates CSS into CommonJS
             loader: 'css-loader',
@@ -71,5 +94,7 @@ module.exports = {
       clientsClaim: true,
       skipWaiting: true,
     }),
+    new MiniCssExtractPlugin(),
+    new BundleAnalyzerPlugin(),
   ],
 };
