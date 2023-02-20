@@ -13,16 +13,28 @@ const dbPromise = openDB(DATABASE_NAME, DATABASE_VERSION, {
 
 const FavoriteRestaurantIdb = {
   async getRestaurant(id) {
-    return (await dbPromise).get(OBJECT_STORE_NAME, id);
+    if (id) {
+      return (await dbPromise).get(OBJECT_STORE_NAME, id);
+    }
+
+    return undefined;
   },
   async getAllRestaurants() {
     return (await dbPromise).getAll(OBJECT_STORE_NAME);
   },
   async putRestaurant(restaurant) {
-    return (await dbPromise).put(OBJECT_STORE_NAME, restaurant);
+    if (restaurant && restaurant.id) {
+      return (await dbPromise).put(OBJECT_STORE_NAME, restaurant);
+    }
+
+    return undefined;
   },
   async deleteRestaurant(id) {
-    return (await dbPromise).delete(OBJECT_STORE_NAME, id);
+    if (id) {
+      return (await dbPromise).delete(OBJECT_STORE_NAME, id);
+    }
+
+    return undefined;
   },
 };
 
