@@ -12,7 +12,7 @@ exports.config = {
   output: 'e2e/outputs',
   helpers: {
     Puppeteer: {
-      url: 'http://127.0.0.1:9000',
+      url: 'https://restaurantappdicoding-staging.afif.dev',
       show: false,
       windowSize: '1200x900',
     },

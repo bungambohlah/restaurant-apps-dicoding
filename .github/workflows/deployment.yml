@@ -38,11 +38,20 @@ jobs:
       - name: Run the integration tests
         run: npm run test
 
-      - name: Run the end-to-end tests
-        run: npm run start-dev && npm run e2e
+      # deploy app to vercel preview (staging)
+      - name: deploy site to vercel preview
+        uses: amondnet/vercel-action@v20
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }} # Required
+          github-token: ${{ secrets.REPO_TOKEN }} #Optional
+          vercel-org-id: ${{ secrets.ORG_ID}} #Required
+          vercel-project-id: ${{ secrets.PROJECT_ID}} #Required
 
-      # deploy app to vercel
-      - name: deploy site to vercel
+      - name: Run the end-to-end tests
+        run: npm run e2e
+
+      # deploy app to vercel production
+      - name: deploy site to vercel production
         uses: amondnet/vercel-action@v20
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }} # Required
