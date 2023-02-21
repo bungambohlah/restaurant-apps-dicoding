@@ -1,3 +1,4 @@
+const webpack = require('webpack'); // to access built-in plugins
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
@@ -7,6 +8,11 @@ const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 // NOTE: uncomment this if you want to analyze the bundles
 // const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const ImageminWebpackPlugin = require('imagemin-webpack-plugin').default;
+const ImageminMozjpeg = require('imagemin-mozjpeg');
+const ImageminPngquant = require('imagemin-pngquant');
+const ImageminSVGO = require('imagemin-svgo');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
   entry: {
@@ -18,6 +24,8 @@ module.exports = {
     clean: true,
   },
   optimization: {
+    runtimeChunk: 'single',
+    moduleIds: 'deterministic',
     splitChunks: {
       chunks: 'all',
       minSize: 20000,
@@ -77,10 +85,13 @@ module.exports = {
     ],
   },
   plugins: [
+    new webpack.ProgressPlugin(),
+    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: path.resolve(__dirname, 'src/templates/index.html'),
     }),
+    new MiniCssExtractPlugin(),
     new CopyWebpackPlugin({
       patterns: [
         {
@@ -95,7 +106,23 @@ module.exports = {
       clientsClaim: true,
       skipWaiting: true,
     }),
-    new MiniCssExtractPlugin(),
     // new BundleAnalyzerPlugin(),
+    new ImageminWebpackPlugin({
+      plugins: [
+        ImageminMozjpeg({
+          quality: 50,
+          progressive: true,
+        }),
+        ImageminPngquant({ quality: [0.5, 0.6] }),
+        ImageminSVGO({
+          plugins: [
+            {
+              name: 'removeViewBox',
+              active: false,
+            },
+          ],
+        }),
+      ],
+    }),
   ],
 };
