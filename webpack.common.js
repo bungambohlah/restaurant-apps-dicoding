@@ -24,6 +24,11 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     clean: true,
   },
+  devServer: {
+    devMiddleware: {
+      writeToDisk: true,
+    },
+  },
   optimization: {
     runtimeChunk: 'single',
     moduleIds: 'deterministic',
