@@ -34,7 +34,10 @@ class RestaurantDetailTesti extends HTMLElement {
             .map(
               ({ name, review }) => `<div class="detail-reviews-root">
             <div class="detail-reviews-root-img">
-              <img src="/images/reviews/user.jpg" />
+            <picture>
+              <source media="(max-width: 600px)" srcset="/images/reviews/user-small.jpg" />
+              <img src="/images/reviews/user-large.jpg" width="400" height="400" title="review from ${name}" alt="review from ${name}" />
+            </picture>
             </div>
             <p class="detail-reviews-root-content" tabindex="0">
               "${review}."

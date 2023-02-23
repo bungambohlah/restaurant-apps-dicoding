@@ -13,6 +13,7 @@ const ImageminMozjpeg = require('imagemin-mozjpeg');
 const ImageminPngquant = require('imagemin-pngquant');
 const ImageminSVGO = require('imagemin-svgo');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const SharpBuild = require('./sharp');
 
 module.exports = {
   entry: {
@@ -68,6 +69,7 @@ module.exports = {
           {
             // Translates CSS into CommonJS
             loader: 'css-loader',
+            options: { url: false },
           },
           {
             loader: 'resolve-url-loader',
@@ -85,6 +87,14 @@ module.exports = {
     ],
   },
   plugins: [
+    {
+      apply: (compiler) => {
+        compiler.hooks.beforeCompile.tapAsync('MyPlugin', async (p, cb) => {
+          await SharpBuild();
+          cb();
+        });
+      },
+    },
     new webpack.ProgressPlugin(),
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
@@ -97,6 +107,51 @@ module.exports = {
         {
           from: path.resolve(__dirname, 'src/public/'),
           to: path.resolve(__dirname, 'dist/'),
+          globOptions: {
+            // CopyWebpackPlugin ignore file inside images folder
+            ignore: ['**/images/**'],
+          },
+        },
+      ],
+    }),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, 'src/public/images/'),
+          to: path.resolve(__dirname, 'dist/images/[path][name]-large[ext]'),
+          globOptions: {
+            // CopyWebpackPlugin ignore some folders and files
+            ignore: [
+              '**/android/**',
+              '**/ios/**',
+              '**/windows11/**',
+              'apple-touch-icon.png',
+              'favicon-16x16.png',
+              'favicon-32x32.png',
+              'favicon.ico',
+              'maskable_icon_x192.png',
+            ],
+          },
+        },
+      ],
+    }),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, 'src/public/images/'),
+          to: path.resolve(__dirname, 'dist/images/[path][name][ext]'),
+          globOptions: {
+            // CopyWebpackPlugin ignore some folders and files
+            ignore: ['**/reviews/**', 'logo.png'],
+          },
+        },
+      ],
+    }),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, 'sharp/'),
+          to: path.resolve(__dirname, 'dist/images/'),
         },
       ],
     }),
