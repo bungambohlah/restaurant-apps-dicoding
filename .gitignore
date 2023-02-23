@@ -2,5 +2,6 @@
 yarn-error.log
 node_modules
 dist
+sharp
 .vercel
 e2e/outputs/*.failed.png
