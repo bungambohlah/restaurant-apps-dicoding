@@ -35,8 +35,8 @@ class RestaurantDetailTesti extends HTMLElement {
               ({ name, review }) => `<div class="detail-reviews-root">
             <div class="detail-reviews-root-img">
             <picture>
-              <source media="(max-width: 800px)" srcset="/images/reviews/user-small.jpg" />
-              <img src="/images/reviews/user-large.jpg" width="400" height="400" title="review from ${name}" alt="review from ${name}" />
+              <source media="(max-width: 800px)" data-srcset="/images/reviews/user-small.jpg" />
+              <img class="lazyload" data-src="/images/reviews/user-large.jpg" width="400" height="400" title="review from ${name}" alt="review from ${name}" />
             </picture>
             </div>
             <p class="detail-reviews-root-content" tabindex="0">

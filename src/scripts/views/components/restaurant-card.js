@@ -29,8 +29,8 @@ class RestaurantCard extends HTMLElement {
     } else if (data) {
       this.innerHTML = `<div class="restaurants-card" tabindex="0">
               <picture>
-                <source media="(max-width: 800px)" srcset="${BASE_IMAGE_URL}/${data.pictureId}" />
-                <img tabindex="0" src="${BASE_MEDIUM_IMAGE_URL}/${data.pictureId}" alt="${data.name}" />
+                <source media="(max-width: 800px)" data-srcset="${BASE_IMAGE_URL}/${data.pictureId}" />
+                <img tabindex="0" class="lazyload" data-src="${BASE_MEDIUM_IMAGE_URL}/${data.pictureId}" alt="${data.name}"  />
               </picture>
               <h1 tabindex="0" class="restaurant-card-body">${data.name}</h1>
               <div class="restaurant-card-footer">

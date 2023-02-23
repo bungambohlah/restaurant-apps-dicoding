@@ -1,5 +1,9 @@
 import 'regenerator-runtime'; /* for async await transpile */
 
+// import lazysizes for lazyload responsive image
+import 'lazysizes';
+import 'lazysizes/plugins/parent-fit/ls.parent-fit';
+
 // import css / scss
 import '../styles/main.scss';
 import '../styles/header.scss';
