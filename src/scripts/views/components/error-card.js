@@ -4,7 +4,7 @@
 import '../../../styles/error.scss';
 
 // import svg
-import ErrorSvg from '../../../public/images/errors/error.svg';
+import ErrorSvg from './error.svg';
 
 class ErrorCard extends HTMLElement {
   // first, observe the attributes
