@@ -139,10 +139,9 @@ pre {
 }
 
 .loader {
-  width: 64px;
+  width: 148px;
   height: 48px;
   position: relative;
-  animation: split 1s ease-in infinite alternate;
 }
 .loader::before,
 .loader::after {
@@ -153,25 +152,35 @@ pre {
   border-radius: 50%;
   left: 0;
   top: 0;
-  transform: translateX(-10px);
   background: #105e7a;
   opacity: 0.75;
   backdrop-filter: blur(20px);
+  animation: split 0.7s ease-in infinite alternate;
 }
 
 .loader::after {
   left: auto;
   right: 0;
   background: rgb(31, 41, 55);
-  transform: translateX(10px);
+  animation: split-reverse 0.7s ease-in infinite alternate;
 }
 
 @keyframes split {
   0%,
   25% {
-    width: 64px;
+    transform: translateX(0px);
   }
   100% {
-    width: 148px;
+    transform: translateX(84px);
+  }
+}
+
+@keyframes split-reverse {
+  0%,
+  25% {
+    transform: translateX(0px);
+  }
+  100% {
+    transform: translateX(-84px);
   }
 }
