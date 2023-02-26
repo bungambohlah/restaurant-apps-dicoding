@@ -11,9 +11,13 @@ const TerserPlugin = require('terser-webpack-plugin');
 const ImageminWebpackPlugin = require('imagemin-webpack-plugin').default;
 const ImageminMozjpeg = require('imagemin-mozjpeg');
 const ImageminPngquant = require('imagemin-pngquant');
+const ImageminWebpWebpackPlugin = require('imagemin-webp-webpack-plugin');
 const ImageminSVGO = require('imagemin-svgo');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+
 const SharpBuild = require('./sharp');
+
+let sharpBuildDone = false;
 
 module.exports = {
   entry: {
@@ -92,16 +96,20 @@ module.exports = {
     ],
   },
   plugins: [
+    new webpack.ProgressPlugin(),
+    new CleanWebpackPlugin(),
     {
       apply: (compiler) => {
         compiler.hooks.beforeCompile.tapAsync('MyPlugin', async (p, cb) => {
-          await SharpBuild();
+          if (!sharpBuildDone) {
+            await SharpBuild();
+            sharpBuildDone = true;
+          }
+
           cb();
         });
       },
     },
-    new webpack.ProgressPlugin(),
-    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: path.resolve(__dirname, 'src/templates/index.html'),
@@ -167,6 +175,17 @@ module.exports = {
       skipWaiting: true,
     }),
     // new BundleAnalyzerPlugin(),
+    new ImageminWebpWebpackPlugin({
+      config: [
+        {
+          test: /\.(jpe?g|png)/,
+          options: {
+            quality: 50,
+          },
+        },
+      ],
+      overrideExtension: true,
+    }),
     new ImageminWebpackPlugin({
       plugins: [
         ImageminMozjpeg({
