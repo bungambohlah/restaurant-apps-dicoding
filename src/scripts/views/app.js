@@ -24,14 +24,28 @@ class App {
   async renderPage() {
     const url = UrlParser.parseActiveUrlWithCombiner();
     const page = routes[url];
+
     this.content.innerHTML = await page.render();
+    const footer = document.createElement('footer');
+    footer.classList.add('footer');
+    footer.innerHTML = `
+      <div class="footer-content">
+        <span>
+          Copyright &copy; <span id="yearCopy"></span>
+        </span>
+        <a href="/#/">HungryFood</a>
+        <span>| Developed with 💖 by</span>
+        <a href="https://afif.dev" rel="noopener noreferrer" target="_blank">Afif Abdillah</a>
+      </div>`;
+    this.content.appendChild(footer);
+
     await page.afterRender();
 
     // skip to content integration
     const skipLinkElem = document.querySelector('.skip-link');
     skipLinkElem.addEventListener('click', (event) => {
       event.preventDefault();
-      document.querySelector('#maincontent').focus();
+      document.querySelector('#maincontainer').focus();
     });
   }
 }

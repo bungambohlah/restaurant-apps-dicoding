@@ -22,58 +22,51 @@
 
 <body>
   <a href="#" class="skip-link">Skip to content</a>
-  <header class="relative">
-    <nav class="navbar">
-      <div class="navbar-container">
-        <!-- Logo -->
-        <a class="navbar-logo" href="/#/" title="Company Logo">
-          <picture>
-            <source media="(max-width: 800px)" data-srcset="./images/logo-small.png" />
-            <img class="lazyload" data-src="./images/logo-large.png" width="160" height="52" title="Company Logo Image"
-              alt="Company Logo" />
-          </picture>
-        </a>
-        <div class="navbar-right">
-          <button type="button" class="side-menu">
-            <span class="sr-only">Open main menu</span>
-            <svg aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd"
-                d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                clip-rule="evenodd"></path>
-            </svg>
-          </button>
-          <ul tabindex="0" class="menu-item">
-            <li><a href="/#/" aria-current="page">Home</a></li>
-            <li><a href="/#/favorite">Favorite</a></li>
-            <li><a href="https://afif.dev">About Us</a></li>
-          </ul>
+  <main id="maincontent" tabindex="0">
+    <header class="relative">
+      <nav class="navbar">
+        <div class="navbar-container">
+          <!-- Logo -->
+          <a class="navbar-logo" href="/#/" title="Company Logo">
+            <picture>
+              <source media="(max-width: 800px)" data-srcset="./images/logo-small.webp" type="image/webp" />
+              <img class="lazyload" data-src="./images/logo-large.webp" width="160" height="52"
+                title="Company Logo Image" alt="Company Logo" />
+            </picture>
+          </a>
+          <div class="navbar-right">
+            <button type="button" class="side-menu">
+              <span class="sr-only">Open main menu</span>
+              <svg aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd"
+                  d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                  clip-rule="evenodd"></path>
+              </svg>
+            </button>
+            <ul tabindex="0" class="menu-item">
+              <li><a href="/#/" aria-current="page">Home</a></li>
+              <li><a href="/#/favorite">Favorite</a></li>
+              <li><a href="https://afif.dev">About Us</a></li>
+            </ul>
+          </div>
+          <div class="navbar-item-container">
+            <ul class="navbar-item-ul">
+              <li>
+                <a class="navbar-item-li" href="/#/" aria-current="page">Home</a>
+              </li>
+              <li>
+                <a class="navbar-item-li" href="/#/favorite">Favorite</a>
+              </li>
+              <li>
+                <a class="navbar-item-li" href="https://afif.dev">About Us</a>
+              </li>
+            </ul>
+          </div>
         </div>
-        <div class="navbar-item-container">
-          <ul class="navbar-item-ul">
-            <li>
-              <a class="navbar-item-li" href="/#/" aria-current="page">Home</a>
-            </li>
-            <li>
-              <a class="navbar-item-li" href="/#/favorite">Favorite</a>
-            </li>
-            <li>
-              <a class="navbar-item-li" href="https://afif.dev">About Us</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-  </header>
-  <main id="maincontent" tabindex="0"></main>
-  <footer class="footer">
-    <span>
-      Copyright &copy; <span id="yearCopy"></span> -&nbsp;
-    </span>
-    <a href="/#/">HungryFood</a>&nbsp;
-    <span>| Developed with 💖 by</span>&nbsp;
-    <a href="https://afif.dev" rel="noreferrer noopener" target="_blank">Afif
-      Abdillah</a>
-  </footer>
+      </nav>
+    </header>
+    <div id="maincontainer"></div>
+  </main>
 </body>
 
 </html>

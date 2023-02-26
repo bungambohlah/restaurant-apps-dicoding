@@ -14,7 +14,7 @@ import '../styles/lineicons.scss';
 import swRegister from './utils/sw-register';
 import App from './views/app';
 
-const content = document.querySelector('#maincontent');
+const content = document.querySelector('#maincontainer');
 const button = document.querySelector('.side-menu');
 const drawer = document.querySelector('.menu-item');
 const app = new App({ button, drawer, content });
