@@ -8,15 +8,7 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 50%;
-  background-image: url('/images/heros/hero-image.jpg');
-  background-image: -webkit-image-set(
-    url('/images/heros/hero-image-small.jpg') 1x,
-    url('/images/heros/hero-image-large.jpg') 2x
-  );
-  background-image: image-set(
-    url('/images/heros/hero-image-small.jpg') 1x,
-    url('/images/heros/hero-image-large.jpg') 2x
-  );
+  background-image: url('/images/heros/hero-image-small.webp');
   height: 500px;
   box-shadow: inset 0 0 5em 1em #000;
 }
@@ -363,6 +355,10 @@
 
   .favorite-title {
     font-size: 3.75rem;
+  }
+
+  .hero-image {
+    background-image: url('/images/heros/hero-image-large.webp');
   }
 }
 
